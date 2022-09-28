@@ -22,6 +22,8 @@ class CopiesController < ApplicationController
       redirect_to copy_path
     when 'time'
       render json: { value: time }
+    when 'bye'
+      render json: { value: bye}
     end
   end
 
