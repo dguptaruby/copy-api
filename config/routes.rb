@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  get '/copy', to: 'copies#index'
-  get '/copy/:key' => 'copies#copy_data'
-  get '/copy/data/refresh' => 'copies#refresh'
+  get '/copy', to: 'copies#copy'
+  get '/copy/:key', to: 'copies#update_value'
 end

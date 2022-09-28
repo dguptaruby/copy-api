@@ -5,7 +5,7 @@ module Airtable
     end
 
     def initialize
-      @response = {}
+      @api_key = Rails.application.credentials[:airtable][:api_key]
     end
 
     def call
@@ -15,8 +15,10 @@ module Airtable
 
     private
 
+    attr_reader :api_key
+
     def response
-      response = HTTParty.get('https://api.airtable.com/v0/appuVsBXIZ6Ng5hqC/Table%201?api_key=keyxb0pMxFICFI2lS')
+      response = HTTParty.get("#{AIRTABLE_BASE_URL}?api_key=#{api_key}")
       JSON.parse(response.body).to_json
     end
   end
