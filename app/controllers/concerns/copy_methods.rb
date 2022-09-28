@@ -3,6 +3,7 @@ module CopyMethods
   GREETING_VIP = 'greetingVIP'.freeze
   INTRO_CREATED_AT = 'intro.created_at'.freeze
   INTRO_UPDATED_AT = 'intro.updated_at'.freeze
+  TIME = 'time'.freeze
 
   def greeting
     copy = @copy_base['records'].select { |record| record['fields']['key'] == GREETING }.first['fields']['copy']
@@ -29,5 +30,13 @@ module CopyMethods
            end.first['fields']['copy']
     time = Time.at(params[:created_at].to_i).to_datetime
     copy.gsub('{updated_at, datetime}', time.to_s) 
+  end
+
+  def time
+    copy = @copy_base['records'].select do |record|
+             record['fields']['key'] == TIME
+           end.first['fields']['copy']
+    time = Time.at(params[:time].to_i).to_datetime
+    copy.gsub('{time, datetime}', time.to_s) 
   end
 end

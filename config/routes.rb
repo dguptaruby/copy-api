@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   get '/copy', to: 'copies#index'
   get '/copy/:key' => 'copies#copy_data'
+  get '/copy/data/refresh' => 'copies#refresh'
 end
