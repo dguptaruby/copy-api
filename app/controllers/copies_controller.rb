@@ -4,6 +4,8 @@ class CopiesController < ApplicationController
   before_action :load_data_from_copy_json, only: %i[copy update_value]
 
   def copy
+    (render json: render_updated_copies and return) if params[:since].present?
+
     render json: @copy_base
   end
 
@@ -36,5 +38,9 @@ class CopiesController < ApplicationController
 
   def render_intro_updated_at
     render json: { value: intro_updated_at }
+  end
+
+  def render_updated_copies
+    Airtable::FetchUpdatedCopies.call(params[:since])
   end
 end
